@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Report Lost</title>
+</head>
+<body>
+
+<h2>Report Lost Item</h2>
+
+<form id="lostForm">
+<input placeholder="Title" id="title"><br><br>
+<textarea placeholder="Description" id="desc"></textarea><br><br>
+<button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("lostForm").addEventListener("submit", async (e)=>{
+  e.preventDefault();
+
+  const data = {
+    title: document.getElementById("title").value,
+    description: document.getElementById("desc").value
+  };
+
+  await fetch("http://localhost:5000/api/lost", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify(data)
+  });
+
+  alert("Lost Item Submitted!");
+});
+</script>
+
+</body>
+</html>
